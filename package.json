@@ -4,10 +4,18 @@
   "description": "creating a movie app using Angular 1",
   "main": "../build/javascripts/bundle.js",
   "scripts": {
-    "test-node": "mocha test/**/*.js",
-    "test-browser": "karma start",
-    "test": "",
-    "start": "node server.js"
+    "build-js": "browserify public/javascripts/main.js > public/javascripts/bundle.js",
+    "browsersync": "browser-sync start --server --files 'public/*'",
+    "build": "npm run build-js && npm run browsersync",
+    "watch:js": "watchify public/javascripts/main.js -o ../build/public/javascripts/bundle.js -t [ babelify --presets [ es2015 ] ]",
+    "test:node": "mocha -u bdd -R spec test/**/*.js",
+    "test:node:watch": "npm run test:node -w",
+    "test:browser": "karma start",
+    "test": "npm run test:node & npm run test:browser",
+    "nodemon": "nodemon server.js",
+    "start": "npm run nodemon",
+    "prestart": "npm run build-js",
+    "clean": "rimraf ../build/*"
   },
   "repository": {
     "type": "git",
