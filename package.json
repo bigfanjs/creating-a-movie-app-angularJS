@@ -1,21 +1,21 @@
-{
-  "name": "movie-app-ng1",
+{ "name": "movie-app-ng1",
   "version": "1.0.0",
   "description": "creating a movie app using Angular 1",
   "main": "../build/javascripts/bundle.js",
   "scripts": {
-    "build-js": "browserify public/javascripts/main.js > public/javascripts/bundle.js",
-    "browsersync": "browser-sync start --server --files 'public/*'",
-    "build": "npm run build-js && npm run browsersync",
-    "watch:js": "watchify public/javascripts/main.js -o ../build/public/javascripts/bundle.js -t [ babelify --presets [ es2015 ] ]",
+    "build:js": "mkdirp ../build/public/javascripts && browserify public/javascripts/main.js > ../build/public/javascripts/bundle.js",
+    "build:html": "mkdirp ../build/public/ && htmlmin -cs ../build/public/index.html public/index.html",
+    "browsersync": "browser-sync start --proxy localhost:8080 --files 'public/*'",
+    "build": "npm run clean && npm run build:js & npm run build:html",
+    "watch:js": "watchify public/javascripts/main.js -d -o public/javascripts/bundle.js --verbose",
     "test:node": "mocha -u bdd -R spec test/**/*.js",
     "test:node:watch": "npm run test:node -w",
     "test:browser": "karma start",
+    "clean": "rm -rf ../build/*",
     "test": "npm run test:node & npm run test:browser",
-    "nodemon": "nodemon server.js",
-    "start": "npm run nodemon",
-    "prestart": "npm run build-js",
-    "clean": "rimraf ../build/*"
+    "nodemon": "nodemon server.js -e js,pug --ignore public/",
+    "start": "npm run build",
+    "watch": "parallelshell \"npm run browsersync\" \"npm run watch:js\" \"npm run nodemon\""
   },
   "repository": {
     "type": "git",
@@ -46,5 +46,4 @@
     "babelify": "7.3.0",
     "pugify": "1.0.5",
     "proxyquireify": "3.2.1"
-  }
-}
+  } }
