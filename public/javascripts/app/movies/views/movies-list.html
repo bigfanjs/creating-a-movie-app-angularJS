@@ -1,0 +1,54 @@
+<div ng-controller="moviesListCtrl" ng-hide="data.error">
+  <div id="filter-bar" class="col-xs-3 well">
+    <h3>BROWSE</h3>
+    <form role="search">
+      <label for="search">Srearch by title:</label>
+      <div class="input-group add-on">
+        <input type="text" class="form-control" placeholder="movie title" name="filter" id="search" ng-model="title">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit" ng-click="lookUp(title)">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+      <br/>
+      <div class="form-group">
+        <label for="type">Choose a movie type:</label>
+        <select class="form-control" id="type" ng-model="movie" ng-options="item.type for item in data.movies | uniq:'type'">
+          <option value="">All</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="order">Sort by:</label>
+        <select class="form-control" name="" id="order">
+          <option value="releaseYear">Year</option>
+          <option value="popularity">Popularity</option>
+        </select>
+      </div>
+      <label for="year">Release Year</label>
+      <div class="row" id="release-year">
+        <div class="col-sm-2" ng-repeat="movie in data.movies | uniq:'releaseYear'">
+          <p>{{ movie.releaseYear }}</p>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div id="movies-list" class="col-xs-8 panel panel-primary" >
+    <div class="row">
+      <div ng-repeat="movie in data.movies | filter:titleFilter | filter:typeFilter">
+        <div class="col-md-3">
+          <div class="thumbnail">
+            <img ng-src="images/{{ movie.cover.path }}">
+            <div class="caption">
+              <h4>{{ movie.title }}</h4>
+              <p>{{ movie.releaseYear }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="text-muted footer" id="footer">
+  <h3>Adel Jojo © 2016</h3>
+</footer>
