@@ -33,7 +33,7 @@ const tempData = [
   { title: "The campaign",
     type: 'comidian',
     runningTime: '132mins',
-    releaseYear: '2006',
+    releaseYear: '2012',
     cover: {
       path: 'the-campaign.jpg',
       name: 'the-campaign' },
@@ -41,7 +41,7 @@ const tempData = [
   { title: "Where is the millers",
     type: 'comidian',
     runningTime: '132mins',
-    releaseYear: '2006',
+    releaseYear: '2013',
     cover: {
       path: 'the-campaign.jpg',
       name: 'the-campaign' },
