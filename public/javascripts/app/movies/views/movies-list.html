@@ -33,9 +33,9 @@
       </div>
     </form>
   </div>
-  <div id="movies-list" class="col-xs-8 panel panel-primary" >
+  <div id="movies-list" class="col-xs-9 panel panel-primary" >
     <div class="row">
-      <div ng-repeat="movie in data.movies | filter:titleFilter | filter:typeFilter">
+      <div ng-repeat="movie in data.movies | filter:titleFilter | filter:typeFilter | range:selectedPage:pageSize">
         <div class="col-md-3">
           <div class="thumbnail">
             <img ng-src="images/{{ movie.cover.path }}">
@@ -47,6 +47,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="pull-right btn-group">
+    <button class="btn btn-primary">1</button>
   </div>
 </div>
 <footer class="text-muted footer" id="footer">
