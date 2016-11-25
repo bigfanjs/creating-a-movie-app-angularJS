@@ -49,7 +49,7 @@
     </div>
   </div>
   <div class="pull-right btn-group">
-    <button class="btn btn-primary">1</button>
+    <a class="btn btn-default" ng-repeat="movie in data.movies | filter:titleFilter | filter:typeFilter | pageCount:pageSize" ng-click="selectPage($index+1)" ng-class="getPageClass($index+1)">{{ $index+1 }}</a>
   </div>
 </div>
 <footer class="text-muted footer" id="footer">
