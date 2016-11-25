@@ -1,8 +1,7 @@
 module.exports = function () {
   return function (data, page, size) {
-    console.log( arguments.length );
     if ( arguments.length < 3 ||
-         !Array.isArray(data)  ||
+         !Array.isArray(data) ||
          !isFinite( page )    ||
          !isFinite( size )) {
       return;
