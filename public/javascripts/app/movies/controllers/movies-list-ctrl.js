@@ -1,7 +1,7 @@
-module.exports = function ( $scope, $http ) {
+module.exports = function ( $scope, $http, MovieListPageCount ) {
   $scope.data = [];
 
-  $scope.pageSize = 12;
+  $scope.pageSize = MovieListPageCount;
   $scope.selectedPage = 1;
   $scope.title = null;
 
