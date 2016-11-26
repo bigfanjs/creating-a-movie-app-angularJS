@@ -1,10 +1,6 @@
 'use strict';
 
-const Movie = require('../models').Movie;
-
-exports.form = function (req, res, next) {
-  res.render('movie', { title: 'Movie', msg: req.flash('error') });
-};
+const Movie = require('../models')('movie');
 
 exports.listMovies = function (req, res, next) {
   Movie.find({}, (err, movies) => {
