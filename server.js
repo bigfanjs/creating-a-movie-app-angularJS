@@ -2,177 +2,41 @@
 
 const
   path = require('path'),
+  logger = require('morgan'),
   express = require('express'),
-  app = express();
+  bodyPasrer = require('body-parser'),
+  session = require('express-session'),
+  cookieParser = require('cookie-parser'),
+  methodOverride = require('method-override'),
+  flash = require('connect-flash');
 
-const tempData = [
-  { title: "Titanic",
-    type: 'Romantic',
-    runningTime: '123mins',
-    releaseYear: '1999',
-    cover: {
-      path: 'default.jpg',
-      name: 'avatar' },
-    story: 'some text for the movie\'s story' },
-  { title: "Death pool",
-    type: 'Action',
-    runningTime: '103mins',
-    releaseYear: '2014',
-    cover: {
-      path: 'default.jpg',
-      name: 'interstellar' },
-    story: 'some text for the movie\'s story' },
-  { title: "Showlin Soccer",
-    type: 'comidian',
-    runningTime: '132mins',
-    releaseYear: '2006',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "The campaign",
-    type: 'comidian',
-    runningTime: '132mins',
-    releaseYear: '2012',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "The jungle book",
-    type: 'adventure',
-    runningTime: '132mins',
-    releaseYear: '2015',
-    cover: {
-      path: 'default.jpg',
-      name: 'jungle-book' },
-    story: 'some text for the movie\'s story' },
-  { title: "Total Recal",
-    type: 'Action',
-    runningTime: '110mins',
-    releaseYear: '2012',
-    cover: {
-      path: 'default.jpg',
-      name: 'total-recal' },
-    story: 'some text for the movie\'s story' },
-  { title: "The Gravity",
-    type: 'Adventure',
-    runningTime: '103mins',
-    releaseYear: '2013',
-    cover: {
-      path: 'default.jpg',
-      name: 'interstellar' },
-    story: 'some text for the movie\'s story' },
-  { title: "Thor",
-    type: 'Imagenary',
-    runningTime: '132mins',
-    releaseYear: '2010',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "Captine america",
-    type: 'Imagenary',
-    runningTime: '132mins',
-    releaseYear: '2014',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "Th change-up",
-    type: 'comidian',
-    runningTime: '132mins',
-    releaseYear: '2011',
-    cover: {
-      path: 'default.jpg',
-      name: 'change-up' },
-    story: 'some text for the movie\'s story' },
-  { title: "Superman",
-    type: 'Action',
-    runningTime: '123mins',
-    releaseYear: '2008',
-    cover: {
-      path: 'default.jpg',
-      name: 'superman' },
-    story: 'some text for the movie\'s story' },
-  { title: "Spiderman",
-    type: 'Action',
-    runningTime: '103mins',
-    releaseYear: '2013',
-    cover: {
-      path: 'default.jpg',
-      name: 'amawing-spiderman' },
-    story: 'some text for the movie\'s story' },
-  { title: "The conjuring 1",
-    type: 'horror',
-    runningTime: '132mins',
-    releaseYear: '2012',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "The conjuring 2",
-    type: 'horror',
-    runningTime: '132mins',
-    releaseYear: '2015',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "Ted 2",
-    type: 'comidian',
-    runningTime: '132mins',
-    releaseYear: '2015',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "The book theif",
-    type: 'Romantic',
-    runningTime: '123mins',
-    releaseYear: '2013',
-    cover: {
-      path: 'default.jpg',
-      name: 'avatar' },
-    story: 'some text for the movie\'s story' },
-  { title: "Tronsportor",
-    type: 'Action',
-    runningTime: '103mins',
-    releaseYear: '2009',
-    cover: {
-      path: 'default.jpg',
-      name: 'interstellar' },
-    story: 'some text for the movie\'s story' },
-  { title: "Knock Knock",
-    type: 'Action',
-    runningTime: '132mins',
-    releaseYear: '2013',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "17 again",
-    type: 'comidian',
-    runningTime: '132mins',
-    releaseYear: '2011',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "Interstaller",
-    type: 'Imagenary',
-    runningTime: '132mins',
-    releaseYear: '2014',
-    cover: {
-      path: 'default.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' }
-];
+const app = express();
 
+const tempData = require('./temp-data');
+
+const movies = require('./routes/movies');
+
+app.use(logger('dev'));
+app.use(bodyPasrer.json());
+app.use(cookieParser('some secret code'));
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: 'some secret code'
+}));
+app.use(methodOverride());
+app.use(flash());
 app.use(express.static(path.join(__dirname, './public')));
 
-app.get('/api/movies', function ( req, res ) {
-  res.json( tempData );
-});
+// app.get('/api/movies', function ( req, res ) {
+//   res.json( tempData );
+// });
+
+app.get('/api/movies', movies.listMovies);
+app.get('/api/movies/:id', movies.viewMovie);
+app.post('/api/movies/', movies.createMovie);
+app.put('/api/movies/:id', movies.updateMovie);
+app.delete('/api/movies/:id', movies.deleteMovie);
 
 app.listen(8080, function () {
   console.log('Listening on port 8080');
