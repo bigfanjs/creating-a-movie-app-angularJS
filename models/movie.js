@@ -12,4 +12,6 @@ module.exports = function (mongoose, db) {
     },
     story: String
   });
+
+  return db.model('movie', schema);
 };
