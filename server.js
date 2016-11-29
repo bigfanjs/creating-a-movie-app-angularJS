@@ -12,9 +12,9 @@ const
 
 const app = express();
 
-const tempData = require('./temp-data');
-
-const movies = require('./routes/movies');
+const
+  movies = require('./routes/movies'),
+  admin = require('./lib/middleware/admin');
 
 app.use(logger('dev'));
 app.use(bodyPasrer.json());
@@ -28,9 +28,7 @@ app.use(methodOverride());
 app.use(flash());
 app.use(express.static(path.join(__dirname, './public')));
 
-// app.get('/api/movies', function ( req, res ) {
-//   res.json( tempData );
-// });
+app.use('/admin/', admin.isAuthenticated());
 
 app.get('/api/movies', movies.listMovies);
 app.get('/api/movies/:id', movies.viewMovie);
