@@ -14,6 +14,7 @@ const app = express();
 
 const
   movies = require('./routes/movies'),
+  login = require('./routes/login'),
   admin = require('./lib/middleware/admin');
 
 app.use(logger('dev'));
