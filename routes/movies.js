@@ -31,12 +31,9 @@ exports.createMovie = function (req, res, next) {
 };
 
 exports.updateMovies = function (req, res, next) {
-  const body = req.body;
-
   Movie.update(
     { _id: req.param.id },
-    { username: body.username,
-      password: body.password },
+    req.body,
     { multi: false },
     (err, movie) => {
       if ( err ) { return send404(res, err); }
