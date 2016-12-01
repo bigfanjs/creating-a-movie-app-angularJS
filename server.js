@@ -7,15 +7,15 @@ const
   bodyPasrer = require('body-parser'),
   session = require('express-session'),
   cookieParser = require('cookie-parser'),
-  methodOverride = require('method-override'),
-  flash = require('connect-flash');
+  methodOverride = require('method-override');
 
 const app = express();
 
 const
   movies = require('./routes/movies'),
   login = require('./routes/login'),
-  admin = require('./lib/middleware/admin');
+  admin = require('./lib/middleware/admin'),
+  isAuthenticated = admin.isAuthenticated;
 
 app.use(logger('dev'));
 app.use(bodyPasrer.json());
@@ -26,16 +26,13 @@ app.use(session({
   secret: 'some secret code'
 }));
 app.use(methodOverride());
-app.use(flash());
 app.use(express.static(path.join(__dirname, './public')));
-
-app.use('/admin/', admin.isAuthenticated());
 
 app.get('/api/movies', movies.listMovies);
 app.get('/api/movies/:id', movies.viewMovie);
-app.post('/api/movies/', movies.createMovie);
-app.put('/api/movies/:id', movies.updateMovie);
-app.delete('/api/movies/:id', movies.deleteMovie);
+app.post('/api/movies/', isAuthenticated(), movies.createMovie);
+app.put('/api/movies/:id', isAuthenticated(), movies.updateMovie);
+app.delete('/api/movies/:id', isAuthenticated(), movies.deleteMovie);
 
 app.listen(8080, function () {
   console.log('Listening on port 8080');
