@@ -2,7 +2,8 @@
 
 const
   mongoose = require('mongoose'),
-  db = mongoose.connect('');
+  config = require('../config/'),
+  db = mongoose.connect(config.database.uri);
 
 const
   movie = require('./movie')(mongoose, db),
