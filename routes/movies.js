@@ -30,7 +30,7 @@ exports.createMovie = function (req, res, next) {
   });
 };
 
-exports.updateMovies = function (req, res, next) {
+exports.updateMovie = function (req, res, next) {
   Movie.update(
     { _id: req.param.id },
     req.body,
