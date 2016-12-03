@@ -3,7 +3,9 @@
   "description": "creating a movie app using Angular 1",
   "main": "../build/javascripts/bundle.js",
   "scripts": {
-    "build:js": "mkdirp ../build/public/javascripts && browserify public/javascripts/main.js > ../build/public/javascripts/bundle.js",
+    "build:js:app": "browserify public/javascripts/app-main.js > ../build/public/javascripts/app-bundle.js",
+    "build:js:admin": "browserify public/javascripts/admin-main.js > ../build/public/javascripts/admin-bundle.js",
+    "build:js": "mkdirp ../build/public/javascripts && build:js:app & build:js:admin",
     "build:html": "mkdirp ../build/public/ && htmlmin -cs ../build/public/index.html public/index.html",
     "browsersync": "browser-sync start --proxy localhost:8080 --files 'public/*'",
     "build": "npm run clean && npm run build:js & npm run build:html",
