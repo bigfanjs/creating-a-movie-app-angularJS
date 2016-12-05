@@ -1,7 +1,8 @@
-'use strict';
-
 const angular = require('angular');
 
 require('angular-route');
 
-angular.module('admin', ['ngRoute']);
+const app = angular.module('admin', ['ngRoute']);
+
+require('./app/admin-login/router');
+require('./app/admin-login/controllers');
