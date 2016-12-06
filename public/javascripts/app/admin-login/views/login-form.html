@@ -1,11 +1,21 @@
-<form ng-submit="login()">
-  <div class="form-group">
-    <label for="username">Name:</label>
-    <input type="text" class="form-control" id="username">
+<div class="well">
+  <div class="alert alert-info" ng-hide="authErr">
+    Enter your username and password.
   </div>
-  <div class="form-group">
-    <label for="password">Password:</label>
-    <input type="password" class="form-control" id="password">
+
+  <form ng-submit="login(username, password)">
+    <div class="form-group">
+      <label for="username">Name:</label>
+      <input type="text" class="form-control" id="username" ng-model="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" ng-model="password">
+    </div>
+    <input class="btn btn-primary" type="submit" value="Login">
+  </form>
+
+  <div class="alert alert-danger" ng-show="authErr">
+    Authentication Failed {{ authErr.status }}
   </div>
-  <input class="btn btn-primary" type="submit" value="Login">
-</form>
+</div>
