@@ -28,6 +28,8 @@ app.use(session({
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, './public')));
 
+app.post('/admin/login', login.submit);
+
 app.get('/api/movies', movies.listMovies);
 app.get('/api/movies/:id', movies.viewMovie);
 app.post('/api/movies/', isAuthenticated(), movies.createMovie);
