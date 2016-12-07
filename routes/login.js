@@ -9,14 +9,14 @@ function send404(res, err) {
 exports.submit = function (req, res, next) {
   const body = req.body;
 
-  admin.authenticate(body.name, body.password, (err, admin) => {
+  admin.authenticate(body.username, body.password, (err, admin) => {
     if ( err ) { return send404(res, err); }
 
     if (admin && admin._id) {
       req.session.uid = admin._id;
-      res.status(200).end( admin );
+      res.status(300).send({redirect: '/movies'});
     } else {
-      res.status(401).end();
+      res.status(401).end('Invalid Credentials');
     }
   });
 };
