@@ -11,6 +11,6 @@ angular.module('movieApp')
     });
 
     $routeProvider.otherwise({
-      templateUrl: 'javascripts/app/movies/views/movies-list.html'
+      redirectTo: '/movies'
     });
   });
