@@ -34,6 +34,13 @@ app.post('/api/movies/', isAuthenticated(), movies.createMovie);
 app.put('/api/movies/:id', isAuthenticated(), movies.updateMovie);
 app.delete('/api/movies/:id', isAuthenticated(), movies.deleteMovie);
 
+/* reroute all the requests back to the public/app.html*/
+app.get('*', function (req, res) {
+  res.sendFile('app.html', {
+    root: path.join(__dirname, './public')
+  });
+});
+
 app.listen(8080, function () {
   console.log('Listening on port 8080');
 });
