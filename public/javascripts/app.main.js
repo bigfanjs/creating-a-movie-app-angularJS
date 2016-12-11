@@ -6,7 +6,7 @@ const app = angular.module('movieApp', ['ngRoute']);
 
 app.config($locationProvider => {
   $locationProvider.html5Mode({
-    enable: true,
+    enabled: true,
     requireBase: false
   });
 });
