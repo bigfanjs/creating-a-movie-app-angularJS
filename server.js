@@ -38,7 +38,7 @@ app.delete('/api/movies/:id', isAuthenticated(), movies.deleteMovie);
 
 /* reroute all the requests back to the public/app.html*/
 app.get('*', function (req, res) {
-  res.sendFile('app.html', {
+  res.sendFile('index.html', {
     root: path.join(__dirname, './public')
   });
 });
