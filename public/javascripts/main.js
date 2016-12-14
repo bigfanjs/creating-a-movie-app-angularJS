@@ -50,3 +50,4 @@ app.config($routeProvider => {
 });
 
 require('./app/movies/services');
+require('./app/movies/controllers');
