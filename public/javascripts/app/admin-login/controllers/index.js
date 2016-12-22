@@ -1,3 +1,3 @@
-const admin = require('angular').module('admin');
+const login = require('angular').module('movieApp');
 
-admin.controller('adminCtrl', require('./admin-ctrl'));
+login.controller('loginCtrl', require('./login-ctrl'));
