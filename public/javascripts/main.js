@@ -1,10 +1,10 @@
 const angular = require('angular');
 
-const baseUrl = '/javascripts/app/movies/views/';
+const baseUrl = '/javascripts/app/';
 
 require('angular-route');
 
-const app = angular.module('movieApp', ['ng-route']);
+const app = angular.module('movieApp', ['ngRoute']);
 
 app.config($locationProvider => {
   $locationProvider.html5Mode({
@@ -15,18 +15,17 @@ app.config($locationProvider => {
 
 app.config($routeProvider => {
   $routeProvider.when('/movies', {
-    templateUrl: baseUrl + 'movies-list.html',
-    controller: 'moviesCtrl'
+    templateUrl: baseUrl + 'movies/views/movies-list.html'
   });
 
   $routeProvider.when('/movies/view/:id', {
-    templateUrl: baseUrl + 'movie-view.html'
+    templateUrl: baseUrl + 'movies/views/movie-view.html'
   });
 
   $routeProvider.when('/admin', {
     resolveRedirectTo: function ($q, authService) {
-      if (authService.isAuthenticated()) {
-        return '/admin/movies';
+      if (authService.isAuth) {
+        return '/admin/dashboard';
       } else {
         return '/admin/login';
       }
@@ -34,20 +33,18 @@ app.config($routeProvider => {
   });
 
   $routeProvider.when('/admin/login', {
-    templateUrl: baseUrl + 'login-form.html',
+    templateUrl: baseUrl + 'admin-login/views/login-form.html',
     controller: 'loginCtrl'
   });
 
-  $routeProvider.when('/admin/movies', {
-    templateUrl: baseUrl + 'admin-movies.html',
-    controller: 'adminCtrl'
-  });
-
-  $routeProvider.when('/admin/movies/view/:id', {
-    templateUrl: 'admin-movie-view.html',
-    controller: 'adminCtrl'
-  });
+  // $routeProvider.when('/admin/dashboard', {
+  //   templateUrl: baseUrl + 'admin/login/views/dashboard.html',
+  //   controller: 'adminCtrl'
+  // });
 });
 
-require('./app/movies/services');
+require('./app/admin-login/services');
+require('./app/admin-login/controllers');
+
 require('./app/movies/controllers');
+require('./app/movies/filters');
