@@ -1,0 +1,76 @@
+<div ng-controller="adminCtrl">
+  <div id="filter-bar" class="col-xs-3">
+  <form role="search">
+    <div class="form-group">
+      <label for="type">Time</label>
+      <select ng-model="filters.time">
+        <option value="day">last 24 hours</option>
+        <option value="weak">last weak</option>
+        <option value="month">last month</option>
+        <option value="6month">last 6 month</option>
+        <option value="year">last year</option>
+        <option value="2years">last 2 years</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="order">Watches:</label>
+      <input type="radio" name="watch" value="watched" ng-model="watched"> unfavored
+      <input type="radio" name="watch" value="unwatched" ng-model="unwatched"> unwatched
+    </div>
+    <div class="form-group">
+      <label for="order">Sort by</label>
+      <select ng-model="filters.order">
+        <option value="favored">most favored</option>
+        <option value="mostWatched">most watched</option>
+        <option value="newest">newest</option>
+        <option value="oldest">oldest</option>
+      </select>
+    </div>
+    <div class="btn-group">
+      <button id="search" type="submit" ng-click="filter(filters)">Search</button>
+      <button id="clear">Clear</button>
+    </div>
+  </form>
+  </div>
+  <div class="col-xs-9">
+    <div>
+      <form>
+        <label for="search">Srearch by title:</label>
+        <div class="input-group add-on">
+          <input type="text" class="form-control" placeholder="movie title" name="filter" id="search" ng-model="title">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" ng-click="lookUp(title)">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+      <br/>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Picture</th>
+          <th>Title</th>
+          <th>Total Watches</th>
+          <th>Favorites</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="movie in data.movies">
+          <td>{{ movie.cover.path }}</td>
+          <td>{{ movie.title }}</td>
+          <td>{{ movie.totalWatches }}</td>
+          <td>{{ movie.favorites }}</td>
+          <td>
+            <div class="btn-group">
+              <button>Edit</button>
+              <button>Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
