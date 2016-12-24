@@ -37,10 +37,10 @@ app.config($routeProvider => {
     controller: 'loginCtrl'
   });
 
-  // $routeProvider.when('/admin/dashboard', {
-  //   templateUrl: baseUrl + 'admin/login/views/dashboard.html',
-  //   controller: 'adminCtrl'
-  // });
+  $routeProvider.when('/admin/dashboard', {
+    templateUrl: baseUrl + 'movies/views/dashboard.html',
+    controller: 'adminCtrl'
+  });
 });
 
 require('./app/admin-login/services');
