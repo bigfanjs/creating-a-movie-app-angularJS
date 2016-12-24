@@ -15,7 +15,7 @@ const
   movies = require('./routes/movies'),
   login = require('./routes/login'),
   admin = require('./lib/middleware/admin'),
-  isAuthenticated = admin.isAuthenticated;
+  isAuth = admin.isAuthenticated;
 
 app.use(logger('dev'));
 app.use(bodyPasrer.json());
@@ -32,11 +32,11 @@ app.post('/admin/login', login.submit);
 
 app.get('/api/movies', movies.listMovies);
 app.get('/api/movies/:id', movies.viewMovie);
-app.post('/api/movies/', isAuthenticated(), movies.createMovie);
-app.put('/api/movies/:id', isAuthenticated(), movies.updateMovie);
-app.delete('/api/movies/:id', isAuthenticated(), movies.deleteMovie);
+app.post('/api/movies/', isAuth(), movies.createMovie);
+app.put('/api/movies/:id', isAuth(), movies.updateMovie);
+app.delete('/api/movies/:id', isAuth(), movies.deleteMovie);
 
-/* reroute all the requests back to the public/app.html*/
+// reroute all the requests back to the public/app.html
 app.get('*', function (req, res) {
   res.sendFile('index.html', {
     root: path.join(__dirname, './public')
