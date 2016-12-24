@@ -41,6 +41,10 @@ app.config($routeProvider => {
     templateUrl: baseUrl + 'movies/views/dashboard.html',
     controller: 'adminCtrl'
   });
+
+  $routeProvider.otherwise({
+    redirectTo: '/movies'
+  });
 });
 
 require('./app/admin-login/services');
