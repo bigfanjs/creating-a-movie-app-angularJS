@@ -10,7 +10,12 @@ module.exports = function (mongoose, db) {
       path: String,
       name: String
     },
-    story: String
+    story: String,
+    meta: {
+      dateAdded: Number,
+      favorites: Number,
+      watches: Number
+    }
   });
 
   return db.model('movie', schema);
