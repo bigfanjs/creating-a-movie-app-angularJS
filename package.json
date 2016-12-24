@@ -1,4 +1,5 @@
-{ "name": "movie-app-ng1",
+{
+  "name": "movie-app-ng1",
   "version": "1.0.0",
   "description": "creating a movie app using Angular 1",
   "main": "../build/javascripts/bundle.js",
@@ -7,7 +8,7 @@
     "build:html": "mkdirp ../build/public/ && htmlmin -o ../build/public/index.html public/index.html",
     "browsersync": "browser-sync start --proxy localhost:8080 --files 'public/*'",
     "build": "npm run clean && npm run build:js & npm run build:html",
-    "watch:js": "npm run build && watchify public/javascripts/main.js -d -o public/javascripts/bundle.js --verbose",
+    "watch:js": "watchify public/javascripts/main.js -d -o public/javascripts/bundle.js --verbose",
     "test:node": "mocha -u bdd -R spec test/**/*.js",
     "test:node:watch": "npm run test:node -w",
     "test:browser": "karma start",
@@ -15,7 +16,7 @@
     "test": "npm run test:node & npm run test:browser",
     "nodemon": "nodemon server.js -e js,pug --ignore public/",
     "start": "npm run build",
-    "watch": "parallelshell \"npm run browsersync\" \"npm run watch:js\" \"npm run nodemon\""
+    "watch": "shell-exec \"npm run browsersync\" \"npm run watch:js\" \"npm run nodemon\""
   },
   "repository": {
     "type": "git",
@@ -45,5 +46,7 @@
     "babel-preset-es2015": "6.6.0",
     "babelify": "7.3.0",
     "pugify": "1.0.5",
-    "proxyquireify": "3.2.1"
-  } }
+    "proxyquireify": "3.2.1",
+    "shell-executor": "0.3.2"
+  }
+}
