@@ -10,6 +10,12 @@ exports.listMovies = function (req, res, next) {
   Movie.find({}, (err, movies) => {
     if ( err ) { return send404(res, err); }
 
+    movies = movies.toObject();
+
+    if (!req.session.uid) {
+      delete movies.meta;
+    }
+
     res.status(200).json( movies );
   });
 };
