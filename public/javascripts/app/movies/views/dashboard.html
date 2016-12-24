@@ -4,12 +4,11 @@
     <div class="form-group">
       <label for="type">Time</label>
       <select ng-model="filters.time">
-        <option value="day">last 24 hours</option>
-        <option value="weak">last weak</option>
-        <option value="month">last month</option>
-        <option value="6month">last 6 month</option>
-        <option value="year">last year</option>
-        <option value="2years">last 2 years</option>
+        <option value="8.64e+7">last day</option>
+        <option value="6.048e+8">last weak</option>
+        <option value="2.628e+9">last month</option>
+        <option value="3.154e+10">last year</option>
+        <option value="all">all time</option>
       </select>
     </div>
     <div class="form-group">
@@ -22,8 +21,8 @@
       <select ng-model="filters.order">
         <option value="favored">most favored</option>
         <option value="mostWatched">most watched</option>
-        <option value="newest">newest</option>
         <option value="oldest">oldest</option>
+        <option value="newest">newest</option>
       </select>
     </div>
     <div class="btn-group">
@@ -58,7 +57,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="movie in data.movies">
+        <tr ng-repeat="movie in data.movies | filter:timeFilter">
           <td>{{ movie.cover.path }}</td>
           <td>{{ movie.title }}</td>
           <td>{{ movie.totalWatches }}</td>
