@@ -1,17 +1,15 @@
 module.exports = function ($scope, $http) {
   $scope.pageSize = adminCount;
 
-  $scope.filters = {};
+  $scope.timeFilter = function ( movie ) {
+    const
+      time = filters.filters.time,
+      dateAdded = new Date().getTime() - movie.dateAdded;
 
-  $http.get('/admin/movies').then(res => {
-    $scope.data.movies = res.data;
-  });
-
-  $scope.lookup = function () {
-
+    return time === null || time >= dateAdded;
   };
 
   $scope.filter = function ( filters ) {
-    
+    $scope.result = 10;
   };
 };
