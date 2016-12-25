@@ -38,7 +38,7 @@
       <div ng-repeat="movie in data.movies | filter:titleFilter | filter:typeFilter | range:selectedPage:pageSize">
         <div class="col-md-3">
           <div class="thumbnail">
-            <img ng-src="images/{{ movie.cover.path }}">
+            <img ng-src="{{ movie.cover.path }}">
             <div class="caption">
               <h4>{{ movie.title }}</h4>
               <p>{{ movie.releaseYear }}</p>
