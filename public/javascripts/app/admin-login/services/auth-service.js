@@ -1,6 +1,5 @@
 module.exports = function ($http, $q) {
   return {
-    isAuth: false,
     login: function (username, password) {
       const dfd = $q.defer();
 
@@ -9,10 +8,8 @@ module.exports = function ($http, $q) {
         .then(
           data => {
             if (data.status === 200) {
-              this.isAuth = true;
               dfd.resolve();
             } else {
-              this.isAuth = false;
               dfd.reject();
             }
           },
@@ -32,7 +29,6 @@ module.exports = function ($http, $q) {
           (data, status) => {
             if (status == 200) {
               dfd.resolve();
-              this.isAuth = false;
             } 
           },
           function (err, status) {
