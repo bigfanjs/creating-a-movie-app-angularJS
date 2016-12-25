@@ -1,9 +1,11 @@
-module.exports = function ($scope, $http) {
-  $scope.pageSize = adminCount;
+module.exports = function ($scope, $http, adminPageCount) {
+  $scope.filters = {};
+
+  $scope.pageSize = adminPageCount;
 
   $scope.timeFilter = function ( movie ) {
     const
-      time = filters.filters.time,
+      time = $scope.filters.time,
       dateAdded = new Date().getTime() - movie.dateAdded;
 
     return time === null || time >= dateAdded;
