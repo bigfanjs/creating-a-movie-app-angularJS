@@ -1,4 +1,4 @@
-module.exports = function ($scope) {
+module.exports = function ($scope, $http) {
   $scope.data = [];
   $scope.selectedPage = 1;
   $scope.title = null;
