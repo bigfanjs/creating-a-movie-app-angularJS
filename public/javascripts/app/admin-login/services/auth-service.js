@@ -7,8 +7,8 @@ module.exports = function ($http, $q) {
       $http
         .post('/admin/login', {username, password})
         .then(
-          (data, status) => {
-            if (status === 200) {
+          data => {
+            if (data.status === 200) {
               this.isAuth = true;
               dfd.resolve();
             } else {
