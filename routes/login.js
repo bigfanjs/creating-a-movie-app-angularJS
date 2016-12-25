@@ -14,7 +14,7 @@ exports.submit = function (req, res, next) {
 
     if (admin && admin._id) {
       req.session.uid = admin._id;
-      res.status(300).send({redirect: '/movies'});
+      res.status(200).end();
     } else {
       res.status(401).end('Invalid Credentials');
     }
