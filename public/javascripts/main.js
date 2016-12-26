@@ -15,35 +15,54 @@ app.config($locationProvider => {
 
 app.config($routeProvider => {
   $routeProvider.when('/movies', {
-    templateUrl: baseUrl + 'movies/views/movies-list.html'
+    templateUrl: baseUrl + 'movies/views/movies-list.html',
+    access: {restrected: false}
   });
 
   $routeProvider.when('/movies/view/:id', {
-    templateUrl: baseUrl + 'movies/views/movie-view.html'
+    templateUrl: baseUrl + 'movies/views/movie-view.html',
+    access: {restrected: false}
   });
 
-  $routeProvider.when('/admin', {
-    resolveRedirectTo: function ($q, authService) {
-      if (authService.isAuth) {
-        return '/admin/dashboard';
-      } else {
-        return '/admin/login';
-      }
-    }
-  });
+  // $routeProvider.when('/admin', {
+  //   resolveRedirectTo: function ($q, authService) {
+  //     if (authService.isAuth) {
+  //       return '/admin/dashboard';
+  //     } else {
+  //       return '/admin/login';
+  //     }
+  //   }
+  // });
 
   $routeProvider.when('/admin/login', {
     templateUrl: baseUrl + 'admin-login/views/login-form.html',
-    controller: 'loginCtrl'
+    controller: 'loginCtrl',
+    access: {restrected: false}
   });
 
   $routeProvider.when('/admin/dashboard', {
     templateUrl: baseUrl + 'movies/views/dashboard.html',
-    controller: 'adminCtrl'
+    controller: 'adminCtrl',
+    access: {restrected: true}
   });
 
   $routeProvider.otherwise({
-    redirectTo: '/movies'
+    redirectTo: '/movies',
+    access: {restrected: false}
+  });
+});
+
+app.run(($rootScope, $location, $route, authService) => {
+  $rootScope.$on('$routeChangeStart', function (ev, next, curr) {
+    if (next.access.restrected) {
+      authService
+        .conformLogin()
+        .then(function () {
+          if (!authService.isAuth()) {
+            $location.path('/admin/login');
+          }
+        });
+    }
   });
 });
 
