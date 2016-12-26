@@ -16,7 +16,6 @@ module.exports = function ($http, $q) {
         .get('/session')
         .then(
           data => {
-            console.log('Fuck!!!', data.status);
             if (data.status === 200) {
               user = true;
               dfd.resolve(data);
@@ -26,7 +25,6 @@ module.exports = function ($http, $q) {
             }
           },
           err => {
-            console.log('Naaari yawald l9a7ba!', err);
             user = false;
             dfd.reject();
           }
