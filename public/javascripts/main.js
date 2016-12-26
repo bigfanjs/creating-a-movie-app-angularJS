@@ -24,15 +24,15 @@ app.config($routeProvider => {
     access: {restrected: false}
   });
 
-  // $routeProvider.when('/admin', {
-  //   resolveRedirectTo: function ($q, authService) {
-  //     if (authService.isAuth) {
-  //       return '/admin/dashboard';
-  //     } else {
-  //       return '/admin/login';
-  //     }
-  //   }
-  // });
+  $routeProvider.when('/admin', {
+    resolveRedirectTo: function ($q, authService) {
+      if (authService.isAuth) {
+        return '/admin/dashboard';
+      } else {
+        return '/admin/login';
+      }
+    }
+  });
 
   $routeProvider.when('/admin/login', {
     templateUrl: baseUrl + 'admin-login/views/login-form.html',
@@ -57,11 +57,11 @@ app.run(($rootScope, $location, $route, authService) => {
     if (next.access.restrected) {
       authService
         .conformLogin()
-        .then(function () {
-          if (!authService.isAuth()) {
+        .then(null,
+          function () {
             $location.path('/admin/login');
           }
-        });
+        );
     }
   });
 });
