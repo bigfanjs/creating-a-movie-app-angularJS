@@ -11,11 +11,23 @@ const
 
 const app = express();
 
+const isAuth = function (req, res, next) {
+  const uid = req.session._id;
+
+  if (uid) {
+    return next();
+  }
+
+  res.status(401).end('Access Denied');
+};
+
+// require routes:
 const
   movies = require('./routes/movies'),
-  login = require('./routes/login'),
-  admin = require('./lib/middleware/admin'),
-  isAuth = admin.isAuthenticated;
+  login = require('./routes/login');
+
+// require middleware:
+const admin = require('./lib/middleware/admin');
 
 app.use(logger('dev'));
 app.use(bodyPasrer.json());
@@ -27,6 +39,7 @@ app.use(session({
 }));
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, './public')));
+app.use(admin);
 
 app.post('/admin/login', login.submit);
 
