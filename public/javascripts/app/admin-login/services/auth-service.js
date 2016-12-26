@@ -10,14 +10,29 @@ module.exports = function ($http, $q) {
       }
     },
     conformLogin: function () {
-      return $http
+      const dfd = $q.defer();
+
+      $http
         .get('/session')
-        .success(data => {
-          user = true;
-        })
-        .error(data => {
-          user = false;
-        });
+        .then(
+          data => {
+            console.log('Fuck!!!', data.status);
+            if (data.status === 200) {
+              user = true;
+              dfd.resolve(data);
+            } else {
+              user = false;
+              dfd.reject();
+            }
+          },
+          err => {
+            console.log('Naaari yawald l9a7ba!', err);
+            user = false;
+            dfd.reject();
+          }
+        );
+
+      return dfd.promise;
     },
     login: function (username, password) {
       const dfd = $q.defer();
