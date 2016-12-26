@@ -30,6 +30,10 @@ app.use(express.static(path.join(__dirname, './public')));
 
 app.post('/admin/login', login.submit);
 
+app.get('/session', isAuth(), function (req, res) {
+  res.send(200, res.admin);
+});
+
 app.get('/api/movies', movies.listMovies);
 app.get('/api/movies/:id', movies.viewMovie);
 app.post('/api/movies/', isAuth(), movies.createMovie);
