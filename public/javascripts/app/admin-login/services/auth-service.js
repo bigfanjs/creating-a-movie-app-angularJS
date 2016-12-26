@@ -1,5 +1,24 @@
 module.exports = function ($http, $q) {
+  var user = null;
+
   return {
+    isAuth: function () {
+      if ( user ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    conformLogin: function () {
+      return $http
+        .get('/session')
+        .success(data => {
+          user = true;
+        })
+        .error(data => {
+          user = false;
+        });
+    },
     login: function (username, password) {
       const dfd = $q.defer();
 
@@ -26,12 +45,12 @@ module.exports = function ($http, $q) {
       $http
         .get('/admin/logout')
         .then(
-          (data, status) => {
-            if (status == 200) {
+          data => {
+            if (data.status == 200) {
               dfd.resolve();
             } 
           },
-          function (err, status) {
+          err => {
             dfd.reject( err );
           }
         );
