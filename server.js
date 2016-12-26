@@ -12,7 +12,7 @@ const
 const app = express();
 
 const isAuth = function (req, res, next) {
-  const uid = req.session._id;
+  const uid = req.session.uid;
 
   if (uid) {
     return next();
@@ -39,19 +39,19 @@ app.use(session({
 }));
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, './public')));
-app.use(admin);
+app.use(admin());
 
 app.post('/admin/login', login.submit);
 
-app.get('/session', isAuth(), function (req, res) {
+app.get('/session', isAuth, function (req, res) {
   res.send(200, res.admin);
 });
 
 app.get('/api/movies', movies.listMovies);
 app.get('/api/movies/:id', movies.viewMovie);
-app.post('/api/movies/', isAuth(), movies.createMovie);
-app.put('/api/movies/:id', isAuth(), movies.updateMovie);
-app.delete('/api/movies/:id', isAuth(), movies.deleteMovie);
+app.post('/api/movies/', isAuth, movies.createMovie);
+app.put('/api/movies/:id', isAuth, movies.updateMovie);
+app.delete('/api/movies/:id', isAuth, movies.deleteMovie);
 
 // reroute all the requests back to the public/app.html
 app.get('*', function (req, res) {
