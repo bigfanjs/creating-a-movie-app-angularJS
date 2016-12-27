@@ -7,7 +7,7 @@ module.exports = function ($scope, $location, authService) {
           $location.path('/admin/dashboard');
         },
         function ( err ) {
-          $location.path('/admin/loign');
+          $location.path('/admin/login');
         }
       );
   };
