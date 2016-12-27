@@ -15,12 +15,12 @@
     <div class="form-group">
       <div class="radio">
         <label for="order">
-          <input type="radio" name="watch" value="watched" ng-model="watched">Unfavored
+          <input type="radio" name="watch" value="watched" ng-model="watched">Unfavored Movies
         </label>
       </div>
       <div class="radio">
         <label for="order">
-          <input type="radio" name="watch" value="unwatched" ng-model="unwatched"> Unwatched
+          <input type="radio" name="watch" value="unwatched" ng-model="unwatched"> Unwatched Movies
         </label>
       </div>
     </div>
@@ -28,7 +28,6 @@
     <div class="form-group">
       <label for="order">Sort by</label>
       <select class="form-control" ng-model="filters.order">
-        <option value="favored">most favored</option>
         <option value="mostWatched">most watched</option>
         <option value="oldest">oldest</option>
         <option value="newest">newest</option>
@@ -54,27 +53,40 @@
         </div>
       </form>
       <br/>
+      <div id="create-movie" class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-lg btn-success">Create A New Movie</button>
+        </div>
+      </div>
     </div>
-    <table class="table table-striped table-bordered">
+    <table id="admin-movies-list" class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Picture</th>
           <th>Title</th>
+          <th>Date Added</th>
           <th>Total Watches</th>
           <th>Favorites</th>
+          <th>Global Activity</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="movie in data.movies | filter:timeFilter">
-          <td>{{ movie.cover.path }}</td>
+        <tr ng-repeat="movie in data.movies">
+          <td>
+            <img class="img-responsive img-rounded" src="{{ movie.cover.path }}">
+          </td>
           <td>{{ movie.title }}</td>
+          <td>{{ movie.dateAdded }}</td>
           <td>{{ movie.totalWatches }}</td>
           <td>{{ movie.favorites }}</td>
           <td>
+            <canvas width="200" height="100"></canvas>
+          </td>
+          <td>
             <div class="btn-group">
-              <button>Edit</button>
-              <button>Delete</button>
+              <button class="btn btn-default">Edit</button>
+              <button class="btn btn-default">Delete</button>
             </div>
           </td>
         </tr>
