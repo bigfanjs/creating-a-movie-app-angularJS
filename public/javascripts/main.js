@@ -25,13 +25,8 @@ app.config($routeProvider => {
   });
 
   $routeProvider.when('/admin', {
-    resolveRedirectTo: function ($q, authService) {
-      if (authService.isAuth) {
-        return '/admin/dashboard';
-      } else {
-        return '/admin/login';
-      }
-    }
+    redirectTo: '/admin/dashboard',
+    access: {restrected: true}
   });
 
   $routeProvider.when('/admin/login', {
