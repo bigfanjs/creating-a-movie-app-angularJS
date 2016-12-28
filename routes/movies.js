@@ -7,15 +7,17 @@ function send404(res, err) {
 }
 
 exports.listMovies = function (req, res, next) {
-  Movie.find({}, (err, movies) => {
+  const callback = function (err, movies) {
     if ( err ) { return send404(res, err); }
 
-    if (!req.session.uid) {
-      delete movies.meta;
-    }
-
     res.status(200).json( movies );
-  });
+  };
+
+  if (req.session.uid) {
+    Movie.find({}, callback);
+  } else {
+    Movie.find({}, {meta: 0}, callback);
+  }
 };
 
 exports.viewMovie = function (req, res, next) {
