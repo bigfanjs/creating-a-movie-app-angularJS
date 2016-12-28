@@ -40,9 +40,13 @@
   </form>
   </div>
   <div class="col-xs-9">
-    <div class="well" id="search-box">
+    <div id="create-movie" class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-lg btn-success">Create A New Movie</button>
+    </div>
+    </div>
+    <div id="search-box">
       <form>
-        <label for="search">Srearch by title:</label>
         <div class="input-group add-on">
           <input type="text" class="form-control" placeholder="movie title" name="filter" id="search" ng-model="title">
           <div class="input-group-btn">
@@ -52,12 +56,6 @@
           </div>
         </div>
       </form>
-      <br/>
-      <div id="create-movie" class="row">
-        <div class="col-xs-12">
-          <button class="btn btn-lg btn-success">Create A New Movie</button>
-        </div>
-      </div>
     </div>
     <table id="admin-movies-list" class="table table-striped table-bordered">
       <thead>
