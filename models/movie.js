@@ -12,7 +12,7 @@ module.exports = function (mongoose, db) {
     },
     story: String,
     meta: {
-      dateAdded: Number,
+      dateAdded: String,
       favorites: Number,
       watches: Number
     }
