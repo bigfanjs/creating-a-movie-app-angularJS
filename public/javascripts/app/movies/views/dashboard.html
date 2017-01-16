@@ -75,9 +75,9 @@
             <img class="img-responsive img-rounded" src="{{ movie.cover.path }}">
           </td>
           <td>{{ movie.title }}</td>
-          <td>{{ movie.dateAdded }}</td>
-          <td>{{ movie.totalWatches }}</td>
-          <td>{{ movie.favorites }}</td>
+          <td>{{ movie.meta.dateAdded }}</td>
+          <td>{{ movie.meta.watches }}</td>
+          <td>{{ movie.meta.favorites }}</td>
           <td>
             <canvas width="200" height="100"></canvas>
           </td>
