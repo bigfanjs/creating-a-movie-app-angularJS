@@ -1,7 +1,9 @@
 module.exports = function ($scope, $http) {
   $scope.data = [];
   $scope.selectedPage = 1;
-  $scope.title = null;
+  $scope.movie = {
+    title: null
+  };
 
   $http.get('/api/movies/').then(response => {
     $scope.data.movies = response.data;
@@ -12,9 +14,11 @@ module.exports = function ($scope, $http) {
   };
 
   $scope.titleFilter = function ( movie ) {
-    const rege = new RegExp($scope.title, 'i');
+    const
+      title = $scope.movie.title,
+      rege = new RegExp(title, 'i');
 
-    return $scope.title === null || movie.title.match( rege );
+    return title === null || movie.title.match( rege );
   };
 
   $scope.selectPage = function ( page ) {
