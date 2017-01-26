@@ -1,47 +1,41 @@
-<div ng-controller="moviesListCtrl" ng-hide="data.error">
-  <div id="filter-bar" class="col-xs-3 well">
-    <h3>BROWSE</h3>
-    <form role="search">
-      <label for="search">Srearch by title:</label>
-      <div class="input-group add-on">
-        <input type="text" class="form-control" placeholder="movie title" name="filter" id="search" ng-model="title">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit" ng-click="lookUp(title)">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
+<div class="row" ng-controller="moviesListCtrl" ng-hide="data.error">
+  <div id="filter-bar" class="col-xs-12 col-sm-6 col-md-3">
+    <div class="col-xs-12 col-md-12 well">
+      <h3>BROWSE</h3>
+      <form role="search">
+        <label for="search">Srearch by title:</label>
+        <input type="text" class="form-control" placeholder="movie title" name="filter" id="search" ng-model="movie.title">
+        <hr width="100%" style="border-color:lightgray;">
+        <div class="form-group">
+          <label for="genre">Choose a movie genre:</label>
+          <select class="form-control" id="genre" ng-model="genre" ng-options="item.genre as item.genre for item in data.movies | uniq:'genre'" multiple>
+            <option value="">All</option>
+          </select>
         </div>
-      </div>
-      <br/>
-      <div class="form-group">
-        <label for="type">Choose a movie type:</label>
-        <select class="form-control" id="type" ng-model="movie" ng-options="item.type for item in data.movies | uniq:'type'">
-          <option value="">All</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="order">Sort by:</label>
-        <select class="form-control" name="" id="order">
-          <option value="releaseYear">Year</option>
-          <option value="popularity">Popularity</option>
-        </select>
-      </div>
-      <label for="year">Release Year</label>
-      <div class="row" id="release-year">
-        <div class="col-sm-2" ng-repeat="movie in data.movies | uniq:'releaseYear'">
-          <p>{{ movie.releaseYear }}</p>
+        <div class="form-group">
+          <label for="order">Sort by:</label>
+          <select class="form-control" name="" id="order" ng-model="sort">
+            <option value="popularity">Popularity</option>
+            <option value="title">Title</option>
+            <option value="releaseDate.year">Release Year</option>
+          </select>
         </div>
-      </div>
-    </form>
+        <label for="release-year-input">Release Year:</label>
+        <input class="form-control" id="release-year-input" type="number" min="1960" max="2017" ng-model="releaseYear">
+      </form>
+    </div>
   </div>
-  <div id="movies-list" class="col-xs-9 panel panel-primary" >
-    <div class="row">
-      <div ng-repeat="movie in data.movies | filter:titleFilter | filter:typeFilter | range:selectedPage:pageSize">
-        <div class="col-md-3">
-          <div class="thumbnail">
-            <img ng-src="{{ movie.cover.path }}">
-            <div class="caption">
-              <h4>{{ movie.title }}</h4>
-              <p>{{ movie.releaseYear }}</p>
+  <div id="movies-list" class="col-xs-12 col-sm-6 col-md-9 panel panel-primary" >
+    <div class="col-xs-12 col-md-12">
+      <div class="row">
+        <div ng-repeat="movie in data.movies | filter:titleFilter | filter:genreFilter | filter:releaseYearFilter | range:selectedPage:pageSize | orderBy:sort">
+          <div class="col-md-3">
+            <div class="thumbnail" ng-click="viewMovie(movie._id)">
+              <img ng-src="{{ movie.cover.url }}">
+              <div class="caption">
+                <h4>{{ movie.title }}</h4>
+                <p>{{ movie.releaseYear }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -49,7 +43,7 @@
     </div>
   </div>
   <div class="pull-right btn-group">
-    <a class="btn btn-default" ng-repeat="movie in data.movies | filter:titleFilter | filter:typeFilter | pageCount:pageSize" ng-click="selectPage($index+1)" ng-class="getPageClass($index+1)">{{ $index+1 }}</a>
+    <a class="btn btn-default" ng-repeat="movie in data.movies | filter:titleFilter | filter:genreFilter | filter:releaseYearFilter | pageCount:pageSize" ng-click="selectPage($index+1)" ng-class="getPageClass($index+1)">{{ $index+1 }}</a>
   </div>
 </div>
 <footer class="text-muted footer" id="footer">
