@@ -1,4 +1,4 @@
-module.exports = function ($scope, $http, movieListPageCount) {
+module.exports = function ($scope, $http, $location, movieListPageCount) {
   $scope.pageSize = movieListPageCount;
 
   $scope.genreFilter = function ( movie ) {
@@ -25,5 +25,9 @@ module.exports = function ($scope, $http, movieListPageCount) {
 
     return releaseYear === null ||
       movie.releaseDate.year.match( regexp );
+  };
+
+  $scope.viewMovie = function (id) {
+    $location.path('/movies/view/' + id);
   };
 };

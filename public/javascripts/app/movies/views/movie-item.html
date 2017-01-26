@@ -1,0 +1,135 @@
+<div ng-controller="movieItemCtrl">
+  <div class="movie-viewer-widget">
+    <div class="col-xs-12 col-sm-4 col-md-3">
+      <div class="thumbnail">
+        <img class="cover-img" ng-srcset="{{movie.cover.url}}"></img>
+        <div class="caption">
+          <h4>{{movie.title}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="movie-viewer-about">
+    <div class="col-xs-12 col-sm-8 col-md-9">
+      <div class="panel panel-simple">
+        <div class="panel-heading clearfix">
+          <h4 id="title" class="panel-title">
+            <strong>{{ movie.title }}({{ movie.releaseDate.year }})</strong>
+          </h4>
+          <div class="btn-group pull-right">
+            <a href="#" class="btn btn-primary">Watch Movie</a>
+            <a href="#" class="btn btn-default">Watch Trailer</a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="movie-info">
+            <div id="movie-overview">
+              <h4>Overview</h4>
+              <p>{{ movie.overview }}</p>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th colspan="2">Movie Information</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Genre</td>
+                  <td>{{movie.genre}}</td>
+                </tr>
+                <tr>
+                  <td>Release Date</td>
+                  <td>{{movie.releaseDate}}</td>
+                </tr>
+                <tr>
+                  <td>Running Time</td>
+                  <td>{{movie.runningTime}}</td>
+                </tr>
+                <tr>
+                  <td>Director</td>
+                  <td>{{movie.director}}</td>
+                </tr>
+                <tr>
+                  <td>Country</td>
+                  <td>{{movie.country}}</td>
+                </tr>
+                <tr>
+                  <td>Language</td>
+                  <td>{{movie.language}}</td>
+                </tr>
+                <tr>
+                  <td>Budget</td>
+                  <td>{{movie.budget}}</td>
+                </tr>
+                <tr>
+                  <td>Box Office</td>
+                  <td>{{movie.boxOffice}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-simple">
+        <div class="panel-heading">
+          <h4 class="panel-title">Starring</h4>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Picture</th>
+                <th>Actor Name</th>
+                <th>Character Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="star in movie.cast | filter:starFilter">
+                <td>
+                  <img class="img-responsive" width="45" ng-srcset="{{star.avatar.url}}">
+                </td>
+                <td>{{star.actor}}</td>
+                <td>{{star.character}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel panel-simple">
+        <div class="panel-heading">
+          <h4 class="panel-title">Cast</h4>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Picture</th>
+                <th>Actor Name</th>
+                <th>Character Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="actor in movie.cast">
+                <td>
+                  <img class="img-responsive" width="45" ng-srcset="{{actor.avatar.url}}">
+                </td>
+                <td>{{actor.actor}}</td>
+                <td>{{actor.character}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-footer clearfix">
+          <div class="panel-buttons">
+            <button id="cancel" class="btn btn-default">Go Back!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer" class="text-muted navbar navbar-inverse navbar-fixed-bottom">
+    © 2017
+    <a href="http://twitter.com/bigfanjs" target="_blank">Adel Jojo</a>
+  </div>
+</div>

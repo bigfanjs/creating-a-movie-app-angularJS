@@ -2,11 +2,6 @@ body {
   padding: 30px;
 }
 
-#filter-bar {
-  margin-right: 20px;
-  width: 280px;
-}
-
 h3, h4 {
   margin-top: 0;
 }
@@ -47,8 +42,4 @@ footer {
 #create-movie > div {
   text-align: center;
   margin-bottom: 20px;
-}
-
-#search, #search-box button {
-  border-radius: 0;
 }
