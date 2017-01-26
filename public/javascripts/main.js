@@ -20,7 +20,7 @@ app.config($routeProvider => {
   });
 
   $routeProvider.when('/movies/view/:id', {
-    templateUrl: baseUrl + 'movies/views/movie-view.html',
+    templateUrl: baseUrl + 'movies/views/movie-item.html',
     access: {restrected: false}
   });
 
