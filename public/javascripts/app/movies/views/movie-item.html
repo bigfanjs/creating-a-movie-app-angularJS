@@ -34,37 +34,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Genre</td>
-                  <td>{{movie.genre}}</td>
-                </tr>
-                <tr>
-                  <td>Release Date</td>
-                  <td>{{movie.releaseDate | date : 'short'}}</td>
-                </tr>
-                <tr>
-                  <td>Running Time</td>
-                  <td>{{movie.runningTime}}</td>
-                </tr>
-                <tr>
-                  <td>Director</td>
-                  <td>{{movie.director}}</td>
-                </tr>
-                <tr>
-                  <td>Country</td>
-                  <td>{{movie.country}}</td>
-                </tr>
-                <tr>
-                  <td>Language</td>
-                  <td>{{movie.language}}</td>
-                </tr>
-                <tr>
-                  <td>Budget</td>
-                  <td>{{movie.budget}}</td>
-                </tr>
-                <tr>
-                  <td>Box Office</td>
-                  <td>{{movie.boxOffice}}</td>
+                <tr ng-repeat="(key, value) in movie | objProps:fieldFilter">
+                  <td>{{ key }}</td>
+                  <td>{{ value }}</td>
                 </tr>
               </tbody>
             </table>
