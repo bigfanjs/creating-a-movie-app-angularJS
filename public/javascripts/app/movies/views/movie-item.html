@@ -57,7 +57,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="star in movie.cast | filter:starFilter">
+              <tr ng-repeat="star in movie.cast | filter:{star:true}">
                 <td>
                   <img class="img-responsive" width="45" ng-srcset="{{star.avatar.url}}">
                 </td>
