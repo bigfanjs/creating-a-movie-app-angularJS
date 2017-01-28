@@ -24,6 +24,16 @@ app.config($routeProvider => {
     access: {restrected: false}
   });
 
+  $routeProvider.when('/movies/edit/:id', {
+    templateUrl: baseUrl + 'movies/views/movie-form.html',
+    access: {restrected: true}
+  });
+
+  $routeProvider.when('/movies/new', {
+    templateUrl: baseUrl + 'movies/views/movie-form.html',
+    access: {restrected: true}
+  });
+
   $routeProvider.when('/admin', {
     redirectTo: '/admin/dashboard',
     access: {restrected: true}
@@ -48,7 +58,7 @@ app.config($routeProvider => {
 });
 
 app.run(($rootScope, $location, $route, authService) => {
-  $rootScope.$on('$routeChangeStart', function (ev, next, curr) {
+  $rootScope.$on('$routeChangeStart', function (ev, next) {
     if (next.access.restrected) {
       authService
         .conformLogin()
