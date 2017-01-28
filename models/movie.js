@@ -4,16 +4,16 @@ module.exports = function (mongoose, db) {
   const schema = new mongoose.Schema({
     title: String,
     genre: String,
-    runningTime: String,
+    runningTime: Number,
     releaseDate: {
-      month: String,
-      day: String,
-      year: String
+      month: Number,
+      day: Number,
+      year: Number
     },
     overview: String,
     director: String,
-    boxOffice: String,
-    budget: String,
+    boxOffice: Number,
+    budget: Number,
     country: String,
     language: String,
     cast: [{
