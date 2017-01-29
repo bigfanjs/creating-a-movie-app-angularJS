@@ -1,4 +1,4 @@
-module.exports = function ($scope, $http, adminPageCount) {
+module.exports = function ($scope, $http, $location, adminPageCount) {
   $scope.filters = {};
 
   $scope.pageSize = adminPageCount;
@@ -13,5 +13,17 @@ module.exports = function ($scope, $http, adminPageCount) {
 
   $scope.filter = function ( filters ) {
     $scope.result = 10;
+  };
+
+  $scope.createMovie = function () {
+    $location.path('/movies/new');
+  };
+
+  $scope.editMovie = function (id) {
+    $location.path('/movies/edit/'+id);
+  };
+
+  $scope.deleteMovie = function (id) {
+
   };
 };
