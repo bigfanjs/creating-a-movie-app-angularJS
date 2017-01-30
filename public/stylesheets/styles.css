@@ -26,6 +26,10 @@ h3, h4 {
   color: #fff;
 }
 
+.with-margin-top {
+  margin-top: 60px;
+}
+
 .thumbnail {
   cursor: pointer;
 }
@@ -34,12 +38,69 @@ footer {
   clear: both
 }
 
-#admin-movies-list .img-responsive {
-  width: 50px;
-  height: 70px;
-}
-
 #create-movie > div {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.panel-simple {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-simple > .panel-heading {
+  font-size: 1.4em;
+  background-color: #dedede;
+}
+
+.panel-heading > h4#title {
+  padding-top: 10px;
+}
+
+#movie-overview > p {
+  margin-left: 20px;
+}
+
+.panel-buttons {
+  float: right;
+}
+
+#filter-bar hr {
+  border-color: #cac6c6;
+}
+
+#search, #search-box button {
+  border-radius: 0;
+}
+
+#search-box {
+  margin-bottom: 20px;
+}
+
+#navbar {
+  min-height: initial;
+  height: 55px;
+}
+
+#navbar img, #navbar #create-movie {
+  margin-top: 2px;
+}
+
+#navbar img {
+  float: left;
+  margin-right: 10px;
+}
+
+#navbar #admin-name {
+  line-height: 36px;
+}
+
+#navbar #admin-name h4 {
+  margin-bottom: 0;
+}
+
+#navbar #admin-name h5 {
+  margin: 0;
+  color: #a0a0a0;
 }
