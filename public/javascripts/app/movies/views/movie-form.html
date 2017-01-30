@@ -1,0 +1,155 @@
+<div class="row" ng-controller="movieEditCtrl">
+  <div id="preview-container">
+    <div class="col-xs-12 col-sm-4 col-md-3">
+      <div class="box thumbnail">
+        <div class="photo">
+          <img id="cover-img" class="img-responsive" ng-srcset="{{movie.cover.url || '/images/default.jpg'}}" ng-click="selectCover($event)">
+          <input id="cover-input" type="file" name="cover" style="display: none" ng-file="movieCover">
+          <span class="notice">
+            <h5>Click to Select</h5>
+          </span>
+        </div>
+        <div class="caption">
+          <h4 id="title">Movie Title</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="form-container">
+    <div class="col-xs-12 col-sm-8 col-md-9">
+      <div class="panel panel-simple">
+        <div class="panel-heading">
+          <div class="panel-title">Movie Info</div>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Title</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <input id="title-input" class="form-control" ng-model="movie.title"></input>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Overview</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <textarea id="overview-input" class="form-control" rows="4" cols="50" ng-model="movie.overview"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Genre</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <select id="genre-input" class="form-control" ng-options="item.genre as item.genre for item in data.movies | uniq:'genre'" ng-model="movie.genre"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Release Date</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <input id="releaseDate-input" class="form-control" ng-model="movie.releaseDate"></input>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Running Time</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <div class="input-group">
+                  <input id="runningTime-input" class="form-control" type="number" max="200" min="30" ng-model="movie.runningTime"></input>
+                  <span class="input-group-addon">minutes</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Director</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <input id="director-input" class="form-control" ng-model="movie.director"></input>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Country</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <select id="country-input" class="form-control" ng-model="movie.country" ng-options="item.country as item.country for item in data.movies | uniq:'country'"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Language</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <select id="language-input" class="form-control" ng-model="movie.language" ng-options="item.language as item.language for item in data.movies | uniq:'language'"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Budget</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input id="budget-input" class="form-control" type="number" ng-model="movie.budget"></input>
+                  <span class="input-group-addon">.00</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-6 col-sm-3 col-md-1">Box Office</label>
+              <div class="col-xs-6 col-sm-9 col-md-11">
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input id="boxOffice-input" class="form-control" type="number" ng-model="movie.boxOffice"></input>
+                  <span class="input-group-addon">.00</span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="panel panel-simple">
+        <div class="panel-heading">
+          <div class="panel-title">Cast
+          <button id="new-actor" class="btn btn-primary btn-sm pull-right" ng-click="addActor()">NEW</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <form id="movie-cast-form" class="form-horizontal">
+            <div class="form-group" ng-repeat="item in movie.cast">
+              <div class="col-md-1">
+                <div class="avatar-img-container">
+                  <img id="img-avatar" width="40" ng-srcset="{{item.avatar.url || '/images/actor.png'}}">
+                  <i class="fa fa-camera fa-2x"></i>
+                  <input id="avatar-input" type="file" name="avatar" style="display:none">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <input class="form-control" id="actor-input" ng-model="item.actor" placeholder="Actor Name">
+              </div>
+              <div class="col-md-3">
+                <input class="form-control" id="character-input" ng-model="item.character" placeholder="Character Name">
+              </div>
+              <div class="col-md-2">
+                <select class="form-control" ng-model="item.gender">
+                  <option value="m">Male</option>
+                  <option value="f">Female</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input id="star-input" type="checkbox" ng-model="item.star"></input>
+                    Star
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <a href="#" id="delete" class="pull-right" ng-click="deleteActor(item)">Delete</a>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="panel-footer clearfix">
+          <div class="panel-buttons">
+            <button id="save" class="btn btn-success">Save</button>
+            <button id="cancel" class="btn btn-default" ng-click="cancel()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer" class="text-muted navbar navbar-inverse navbar-fixed-bottom">
+  © 2017
+  <a href="http://twitter.com/bigfanjs" target="_blank">Adel Jojo</a>
+</div>
