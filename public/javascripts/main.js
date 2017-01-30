@@ -76,3 +76,5 @@ require('./app/admin-login/controllers');
 
 require('./app/movies/controllers');
 require('./app/movies/filters');
+require('./app/movies/directives');
+require('./app/movies/services');
