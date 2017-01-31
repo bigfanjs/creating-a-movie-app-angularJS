@@ -1,7 +1,7 @@
-module.exports = function ($scope, $element, $location, $routeParams, fileUpload) {
+module.exports = function ($scope, $element, $location, $routeParams) {
   const id = $routeParams.id;
 
-  const movie = { cast: [{}] };
+  const movie = { cast: [{}], cover: {} };
 
   if (typeof id !== 'undefined') {
     $scope.movie = $scope.data.movies.find(movie => {
@@ -29,20 +29,19 @@ module.exports = function ($scope, $element, $location, $routeParams, fileUpload
 
   $scope.selectCover = function () {
     $element[0].querySelector('#cover-input').click();
+  };
 
-    $scope.$on('file-selected', function () {
-      fileUpload
-        .handleFileSelect($scope.movieCover)
-        .then(
-          function (url) {
-            $scope.$apply(function () {
-              movie.cover.url = url;
-            });
-          },
-          function (err) {
-            console.error(err);
-          }
-        );
-    });
+  $scope.handleFileSelect = function () {
+    const fileReader = new FileReader();
+
+    fileReader.onload = function (e) {
+      const url = e.target.result;
+
+      $scope.$apply(function () {
+        movie.cover.url = url;
+      });
+    };
+
+    fileReader.readAsDataURL($scope.movieCover);
   };
 };
