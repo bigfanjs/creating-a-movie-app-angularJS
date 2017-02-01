@@ -3,8 +3,8 @@
     <div class="col-xs-12 col-sm-4 col-md-3">
       <div class="box thumbnail">
         <div class="photo">
-          <img id="cover-img" class="img-responsive" ng-srcset="{{movie.cover.url || '/images/default.jpg'}}" ng-click="selectCover($event)">
-          <input id="cover-input" type="file" name="cover" style="display: none" ng-file="movieCover">
+          <img id="cover-img" class="img-responsive" src="{{movie.cover.url || '/images/default.jpg'}}" ng-click="selectCover()">
+          <input id="cover-input" type="file" name="cover" style="display:none" ng-file="movieCover" on-change="handleFileSelect(e, 'cover', movieCover)">
           <span class="notice">
             <h5>Click to Select</h5>
           </span>
@@ -108,9 +108,9 @@
             <div class="form-group" ng-repeat="item in movie.cast">
               <div class="col-md-1">
                 <div class="avatar-img-container">
-                  <img id="img-avatar" width="40" ng-srcset="{{item.avatar.url || '/images/actor.png'}}">
-                  <i class="fa fa-camera fa-2x"></i>
-                  <input id="avatar-input" type="file" name="avatar" style="display:none">
+                  <img id="avatar-img" width="40" src="{{item.avatar.url || '/images/actor.png'}}">
+                  <i class="fa fa-camera fa-2x" ng-click="selectAvatar($event)"></i>
+                  <input id="avatar-input" type="file" name="avatar" style="display:none" ng-file="avatars[$index]" on-change="handleFileSelect(e, 'avatar', avatars[$index])">
                 </div>
               </div>
               <div class="col-md-3">
@@ -141,7 +141,7 @@
         </div>
         <div class="panel-footer clearfix">
           <div class="panel-buttons">
-            <button id="save" class="btn btn-success">Save</button>
+            <button id="save" class="btn btn-success" ng-click="save()">Save</button>
             <button id="cancel" class="btn btn-default" ng-click="cancel()">Cancel</button>
           </div>
         </div>
