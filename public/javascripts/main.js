@@ -3,8 +3,9 @@ const angular = require('angular');
 const baseUrl = '/javascripts/app/';
 
 require('angular-route');
+require('angular-resource');
 
-const app = angular.module('movieApp', ['ngRoute']);
+const app = angular.module('movieApp', ['ngRoute', 'ngResource']);
 
 app.config($locationProvider => {
   $locationProvider.html5Mode({
