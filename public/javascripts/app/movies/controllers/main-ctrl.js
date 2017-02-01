@@ -1,13 +1,10 @@
-module.exports = function ($scope, $http) {
-  $scope.data = [];
+module.exports = function ($scope, $http, $resource, baseURL) {
   $scope.selectedPage = 1;
-  $scope.movie = {
-    title: null
-  };
+  $scope.movie = { title: null };
 
-  $http.get('/api/movies/').then(response => {
-    $scope.data.movies = response.data;
-  });
+  $scope.moviesResource = $resource(baseURL + ':id', {id: '@id'});
+
+  $scope.movies = $scope.moviesResource.query();
 
   $scope.lookUp = function ( title ) {
     $scope.title = title;
