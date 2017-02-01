@@ -32,6 +32,7 @@ h3, h4 {
 
 .thumbnail {
   cursor: pointer;
+  height: 325px;
 }
 
 footer {
