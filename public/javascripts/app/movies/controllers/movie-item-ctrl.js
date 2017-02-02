@@ -12,11 +12,11 @@ module.exports = function ($scope, $routeParams) {
     'releaseDate'
   ];
 
-  $scope.movie = $scope.data.movies.find(movie => {
+  $scope.movie = $scope.movies.find(movie => {
     return movie._id === id;
   });
 
   $scope.fieldFilter = function ( key ) {
-    return fields.find(field => field === key);
+    return fields.includes( key );
   };
 };
