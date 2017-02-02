@@ -38,13 +38,13 @@
             <div class="form-group">
               <label class="control-label col-xs-6 col-sm-3 col-md-1">Genre</label>
               <div class="col-xs-6 col-sm-9 col-md-11">
-                <select id="genre-input" class="form-control" ng-options="item.genre as item.genre for item in data.movies | uniq:'genre'" ng-model="movie.genre"></select>
+                <select id="genre-input" class="form-control" ng-options="item as item for item in collections.genre" ng-model="movie.genre"></select>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-xs-6 col-sm-3 col-md-1">Release Date</label>
               <div class="col-xs-6 col-sm-9 col-md-11">
-                <input id="releaseDate-input" class="form-control" ng-model="movie.releaseDate"></input>
+                <input id="releaseDate-input" class="form-control" ng-model="movie.releaseDate" release-date></input>
               </div>
             </div>
             <div class="form-group">
@@ -65,13 +65,13 @@
             <div class="form-group">
               <label class="control-label col-xs-6 col-sm-3 col-md-1">Country</label>
               <div class="col-xs-6 col-sm-9 col-md-11">
-                <select id="country-input" class="form-control" ng-model="movie.country" ng-options="item.country as item.country for item in data.movies | uniq:'country'"></select>
+                <select id="country-input" class="form-control" ng-model="movie.country" ng-options="item as item for item in collections.country"></select>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-xs-6 col-sm-3 col-md-1">Language</label>
               <div class="col-xs-6 col-sm-9 col-md-11">
-                <select id="language-input" class="form-control" ng-model="movie.language" ng-options="item.language as item.language for item in data.movies | uniq:'language'"></select>
+                <select id="language-input" class="form-control" ng-model="movie.language" ng-options="item as item for item in collections.language"></select>
               </div>
             </div>
             <div class="form-group">
