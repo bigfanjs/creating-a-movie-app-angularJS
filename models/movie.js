@@ -5,11 +5,7 @@ module.exports = function (mongoose, db) {
     title: String,
     genre: String,
     runningTime: Number,
-    releaseDate: {
-      month: Number,
-      day: Number,
-      year: Number
-    },
+    releaseDate: Date,
     overview: String,
     director: String,
     boxOffice: Number,
