@@ -32,6 +32,9 @@ h3, h4 {
 
 .thumbnail {
   cursor: pointer;
+}
+
+#movies-list .thumbnail {
   height: 325px;
 }
 
@@ -155,4 +158,8 @@ span.notice {
 
 .panel-heading > h4#title {
   padding-top: 10px;
+}
+
+#dashboard-movies-list td, #dashboard-movies-list th {
+  text-align: center;
 }
