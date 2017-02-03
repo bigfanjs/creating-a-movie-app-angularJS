@@ -8,17 +8,13 @@
         <hr width="100%" style="border-color:lightgray;">
         <div class="form-group">
           <label for="genre">Choose a movie genre:</label>
-          <select class="form-control" id="genre" ng-model="genre" ng-options="item.genre as item.genre for item in data.movies | uniq:'genre'" multiple>
+          <select class="form-control" id="genre" ng-model="genre" ng-options="item.genre as item.genre for item in movies | uniq:'genre'" multiple>
             <option value="">All</option>
           </select>
         </div>
         <div class="form-group">
           <label for="order">Sort by:</label>
-          <select class="form-control" name="" id="order" ng-model="sort">
-            <option value="popularity">Popularity</option>
-            <option value="title">Title</option>
-            <option value="releaseDate.year">Release Year</option>
-          </select>
+          <select class="form-control" name="" id="order" ng-model="sort" ng-options="field for field in fields"></select>
         </div>
         <label for="release-year-input">Release Year:</label>
         <input class="form-control" id="release-year-input" type="number" min="1960" max="2017" ng-model="releaseYear">
@@ -28,10 +24,10 @@
   <div id="movies-list" class="col-xs-12 col-sm-6 col-md-9 panel panel-primary" >
     <div class="col-xs-12 col-md-12">
       <div class="row">
-        <div ng-repeat="movie in data.movies | filter:titleFilter | filter:genreFilter | filter:releaseYearFilter | range:selectedPage:pageSize | orderBy:sort">
+        <div ng-repeat="movie in movies | filter:titleFilter | filter:genreFilter | filter:releaseYearFilter | range:selectedPage:pageSize | orderBy:sort">
           <div class="col-md-3">
             <div class="thumbnail" ng-click="viewMovie(movie._id)">
-              <img ng-src="{{ movie.cover.url }}">
+              <img ng-src="{{ movie.cover.url || '/images/default.jpg' }}">
               <div class="caption">
                 <h4>{{ movie.title }}</h4>
                 <p>{{ movie.releaseYear }}</p>
@@ -43,7 +39,7 @@
     </div>
   </div>
   <div class="pull-right btn-group">
-    <a class="btn btn-default" ng-repeat="movie in data.movies | filter:titleFilter | filter:genreFilter | filter:releaseYearFilter | pageCount:pageSize" ng-click="selectPage($index+1)" ng-class="getPageClass($index+1)">{{ $index+1 }}</a>
+    <a class="btn btn-default" ng-repeat="movie in movies | filter:titleFilter | filter:genreFilter | filter:releaseYearFilter | pageCount:pageSize" ng-click="selectPage($index+1)" ng-class="getPageClass($index+1)">{{ $index+1 }}</a>
   </div>
 </div>
 <footer class="text-muted footer" id="footer">
