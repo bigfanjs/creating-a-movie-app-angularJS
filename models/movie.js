@@ -27,9 +27,9 @@ module.exports = function (mongoose, db) {
       url: String
     },
     meta: {
-      likes: Number,
-      dislikes: Number,
-      watches: Number
+      likes: {type: Number, default: 0},
+      dislikes: {type: Number, default: 0},
+      watches: {type: Number, default: 0}
     }
   }, {
     timestamps: true
