@@ -27,10 +27,12 @@ module.exports = function (mongoose, db) {
       url: String
     },
     meta: {
-      dateAdded: String,
-      favorites: Number,
+      likes: Number,
+      dislikes: Number,
       watches: Number
-    } 
+    }
+  }, {
+    timestamps: true
   });
 
   return db.model('movie', schema);
