@@ -7,9 +7,13 @@ const
   bodyPasrer = require('body-parser'),
   session = require('express-session'),
   cookieParser = require('cookie-parser'),
-  methodOverride = require('method-override');
+  methodOverride = require('method-override'),
+  multer = require('multer');
 
-const app = express();
+const
+  app = express(),
+  upload = multer({dest: 'tmp/'}),
+  join = path.join;
 
 const isAuth = function (req, res, next) {
   const uid = req.session.uid;
@@ -20,6 +24,9 @@ const isAuth = function (req, res, next) {
 
   res.status(401).end('Access Denied');
 };
+
+app.set('covers', join(__dirname, './public/images/covers/'));
+app.set('avatars', join(__dirname, './public/images/avatars/'));
 
 // require routes:
 const
@@ -47,12 +54,23 @@ app.get('/session', isAuth, function (req, res) {
   res.send(200, res.admin);
 });
 
-app.get('/api/movies', movies.listMovies);
+app.get('/api/movies', movies.showMovies);
 app.get('/api/movies/:id', movies.viewMovie);
 app.post('/api/movies/', isAuth, movies.createMovie);
 app.put('/api/movies/:id', isAuth, movies.updateMovie);
 app.delete('/api/movies/:id', isAuth, movies.deleteMovie);
-
+app.post(
+  '/api/movies/:id/cover',
+  isAuth,
+  upload.single('cover'),
+  movies.uploadCover.bind(null, app.get('covers'))
+);
+app.post(
+  '/api/movies/:id/avatars',
+  isAuth,
+  upload.array('avatars'),
+  movies.uploadAvatars.bind(null, app.get('avatars'))
+);
 // reroute all the requests back to the public/app.html
 app.get('*', function (req, res) {
   res.sendFile('index.html', {
