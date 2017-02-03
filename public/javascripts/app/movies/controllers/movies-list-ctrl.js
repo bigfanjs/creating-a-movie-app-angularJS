@@ -1,6 +1,12 @@
 module.exports = function ($scope, $http, $location, movieListPageCount) {
   $scope.pageSize = movieListPageCount;
 
+  $scope.fields = [
+    'title',
+    'releaseDate',
+    'popularity',
+  ];
+
   $scope.genreFilter = function ( movie ) {
     var genre = null;
 
@@ -24,7 +30,7 @@ module.exports = function ($scope, $http, $location, movieListPageCount) {
     }
 
     return releaseYear === null ||
-      movie.releaseDate.year.match( regexp );
+      new Date(movie.releaseDate).getFullYear().toString().match( regexp );
   };
 
   $scope.viewMovie = function (id) {
