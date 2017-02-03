@@ -1,10 +1,14 @@
 module.exports = function () {
   return {
     restrict: 'A',
-    require: '^ngModel',
+    require: 'ngModel',
     link(scope, element, attrs, ngModelCtrl) {
-      ngModelCtrl.$formaters.push(modelValue => {
-        return modelValue.toLocalDateString();
+      ngModelCtrl.$formatters.push(modelValue => {
+        if (typeof modelValue === 'undefined') {
+          return '';
+        }
+
+        return new Date(modelValue).toLocaleDateString();
       });
 
       ngModelCtrl.$parsers.push(viewValue => {
