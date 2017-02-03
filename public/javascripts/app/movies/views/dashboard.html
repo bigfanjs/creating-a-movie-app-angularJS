@@ -78,10 +78,10 @@
           <tr>
             <th>Picture</th>
             <th>Title</th>
-            <th>Date Added</th>
+            <th>Date Created</th>
+            <th>Last Time Updated</th>
             <th>Total Watches</th>
             <th>Likes</th>
-            <th>Global Activity</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -91,12 +91,10 @@
               <img class="img-responsive" ng-srcset="{{ movie.cover.url }}" width="55px" height="90px">
             </td>
             <td>{{ movie.title }}</td>
-            <td>{{ movie.meta.dateAdded }}</td>
+            <td>{{ movie.createdAt | date:'mm/dd/yyyy'}}</td>
+            <td>{{ movie.updatedAt | date:'mm/dd/yyyy'}}</td>
             <td>{{ movie.meta.watches }}</td>
             <td>{{ movie.meta.likes }}</td>
-            <td>
-              <canvas width="200" height="70"></canvas>
-            </td>
             <td>
               <div class="btn-group">
                 <button class="btn btn-primary" ng-click="editMovie(movie._id)">Edit</button>
