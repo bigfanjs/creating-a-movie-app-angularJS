@@ -4,3 +4,4 @@ movieApp.filter('uniq', require('./uniq'));
 movieApp.filter('range', require('./range'));
 movieApp.filter('pageCount', require('./page-count'));
 movieApp.filter('objProps', require('./obj-props'));
+movieApp.filter('formatDate', require('./format-date'));
