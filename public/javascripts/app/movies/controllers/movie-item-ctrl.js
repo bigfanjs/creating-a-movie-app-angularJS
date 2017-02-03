@@ -1,6 +1,4 @@
-module.exports = function ($scope, $routeParams) {
-  const id = $routeParams.id;
-
+module.exports = function ($scope, $routeParams, Movie) {
   const fields = [
     'genre',
     'runningTime',
@@ -12,9 +10,7 @@ module.exports = function ($scope, $routeParams) {
     'releaseDate'
   ];
 
-  $scope.movie = $scope.movies.find(movie => {
-    return movie._id === id;
-  });
+  $scope.movie = Movie.get({id: $routeParams.id});
 
   $scope.fieldFilter = function ( key ) {
     return fields.includes( key );

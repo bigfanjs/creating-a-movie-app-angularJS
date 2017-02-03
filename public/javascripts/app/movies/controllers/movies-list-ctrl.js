@@ -1,4 +1,4 @@
-module.exports = function ($scope, $http, $location, movieListPageCount) {
+module.exports = function ($scope, $location, Movie, movieListPageCount) {
   $scope.pageSize = movieListPageCount;
 
   $scope.fields = [
@@ -6,6 +6,8 @@ module.exports = function ($scope, $http, $location, movieListPageCount) {
     'releaseDate',
     'popularity',
   ];
+
+  $scope.movies = Movie.query();
 
   $scope.genreFilter = function ( movie ) {
     var genre = null;
