@@ -1,7 +1,9 @@
-module.exports = function ($scope, $http, $location, adminPageCount) {
+module.exports = function ($scope, $http, $location, Movie, adminPageCount) {
   $scope.filters = {};
 
   $scope.pageSize = adminPageCount;
+
+  $scope.movies = Movie.query();
 
   $scope.timeFilter = function ( movie ) {
     const

@@ -1,10 +1,6 @@
-module.exports = function ($scope, $http, $resource, baseURL) {
+module.exports = function ($scope, Movie) {
   $scope.selectedPage = 1;
   $scope.movie = { title: null };
-
-  $scope.moviesResource = $resource(baseURL + ':id', {id: '@id'});
-
-  $scope.movies = $scope.moviesResource.query();
 
   $scope.lookUp = function ( title ) {
     $scope.title = title;
