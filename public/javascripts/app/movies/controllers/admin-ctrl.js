@@ -1,20 +1,18 @@
-module.exports = function ($scope, $http, $location, Movie, adminPageCount) {
-  $scope.filters = {};
-
+module.exports = function ($scope, $http, $location, $routeParams, Movie, adminPageCount) {
+  $scope.params = {};
   $scope.pageSize = adminPageCount;
+  $scope.movies = Movie.query({page: $routeParams.page});
 
-  $scope.movies = Movie.query();
-
-  $scope.timeFilter = function ( movie ) {
-    const
-      time = $scope.filters.time,
-      dateAdded = new Date().getTime() - movie.dateAdded;
-
-    return time === null || time >= dateAdded;
+  $scope.lookUp = function ( title ) {
+    $scope.movies = Movie.query({ title });
   };
 
-  $scope.filter = function ( filters ) {
-    $scope.result = 10;
+  $scope.filter = function (filters) {
+    $scope.movies = Movie.query(filters);
+  };
+
+  $scope.clear = function () {
+    $scope.params = {};
   };
 
   $scope.createMovie = function () {
@@ -26,6 +24,8 @@ module.exports = function ($scope, $http, $location, Movie, adminPageCount) {
   };
 
   $scope.deleteMovie = function (id) {
-
+    Movie.delete({ id }, function (removed) {
+      $scope.movies.splice($scope.movies.indexOf(removed), 1);
+    });
   };
 };
