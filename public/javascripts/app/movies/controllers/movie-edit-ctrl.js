@@ -1,10 +1,5 @@
-module.exports = function ($scope, $element, $location, $routeParams, fileUpload) {
-  const id = $routeParams.id;
-
-  const movie = { cast: [{}] };
-
+module.exports = function ($scope, $element, $location, $routeParams, Movie, fileUpload) {
   $scope.avatars = [];
-
   $scope.collections = {
     genre: [
       'Action',
@@ -32,37 +27,32 @@ module.exports = function ($scope, $element, $location, $routeParams, fileUpload
     ]
   };
 
-  if (typeof id !== 'undefined') {
-    $scope.movie = $scope.movies.find(movie => {
-      return movie._id === id;
-    });
+  if (typeof $routeParams.id !== 'undefined') {
+    $scope.movie = Movie.get({id: $routeParams.id});
   } else {
-    $scope.movie = movie;
+    $scope.movie = new Movie({cast: [{}]});
   }
 
   $scope.save = function () {
-    new $scope
-      .moviesResource(movie)
-      .$save()
-      .then(newMovie => {
-        if ($scope.avatars.length) {
-          fileUpload.uploadFile(
-            'avatars',
-            $scope.avatars,
-            '/api/movies/' + newMovie._id + '/avatars'
-          );
-        }
+    Movie.save($scope.movie, function (newMovie) {
+      if ($scope.avatars.length) {
+        fileUpload.uploadFile(
+          'avatars',
+          $scope.avatars,
+          '/api/movies/' + newMovie._id + '/avatars'
+        );
+      }
 
-        if ($scope.movieCover != null) {
-          fileUpload.uploadFile(
-            'cover',
-            $scope.movieCover,
-            '/api/movies/' + newMovie._id + '/cover'
-          );
-        }
+      if ($scope.movieCover != null) {
+        fileUpload.uploadFile(
+          'cover',
+          $scope.movieCover,
+          '/api/movies/' + newMovie._id + '/cover'
+        );
+      }
 
-        $scope.movies.push(newMovie);
-      });
+      $location.path('/admin/dashboard');
+    });
   };
 
   $scope.cancel = function () {
@@ -70,11 +60,11 @@ module.exports = function ($scope, $element, $location, $routeParams, fileUpload
   };
 
   $scope.addActor = function () {
-    movie.cast.push({});
+    $scope.movie.cast.push({});
   };
 
   $scope.deleteActor = function (actor) {
-    movie.cast.splice(movie.cast.indexOf(actor), 1);
+    $scope.movie.cast.splice($scope.movie.cast.indexOf(actor), 1);
   };
 
   $scope.selectCover = function () {
