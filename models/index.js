@@ -5,6 +5,8 @@ const
   config = require('../config/'),
   db = mongoose.connect(config.database.uri);
 
+mongoose.Promise = global.Promise;
+
 const
   movie = require('./movie')(mongoose, db),
   admin = require('./admin')(mongoose, db);
