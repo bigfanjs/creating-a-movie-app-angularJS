@@ -1,4 +1,4 @@
-# Creating a movie application using Angular 1.
+# Creating a movie application using AngularJS.
 
 This is a very simple movie application example using Angularjs on the client side.
 
